@@ -2,10 +2,10 @@
  
 coreos: 
   etcd: 
-    addr: "$private_ipv4:4001"
-    discovery: "https://discovery.etcd.io/76e9d18c0b25dce46cd482757d14af37"
+    addr: "172.16.1.20:4001"
+    discovery: "https://discovery.etcd.io/7743a539914ed6a8a2a814f958348291"
     name: coreos0
-    peer-addr: "$private_ipv4:7001"
+    peer-addr: "172.16.1.20:7001"
   units: 
     - 
       command: start

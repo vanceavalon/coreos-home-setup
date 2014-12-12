@@ -1,0 +1,19 @@
+#cloud-config
+ 
+coreos: 
+  etcd: 
+    addr: "$private_ipv4:4001"
+    discovery: "https://discovery.etcd.io/76e9d18c0b25dce46cd482757d14af37"
+    name: coreos0
+    peer-addr: "$private_ipv4:7001"
+  units: 
+    - 
+      command: start
+      name: etcd.service
+    - 
+      command: start
+      name: fleet.service
+hostname: coreos0
+ssh_authorized_keys: 
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNQYI1x21AkfX4T9WynkXyP36Hf7NWjAPlgoQByWHA4O6XiXitHTeCgZsPPKqQaNdYU7Dq3mX3sg24IU8X5j2WY/vMDTOMiBaebSOulZDULfpHI+RSb9iczWmzRngh4DbCwEZZU999HaQ2VcGqO4juul5hUW+fdQZvzqOL2J0Jj833AiYoQssOVIdPxGkEZejncCat/A6PpwLKh6p/Yq8fC/1YbJLAcTeWJmCDIU9oY6K1MEiNkcibwRTkr/khKI0fAPWuJBkW5D12JJWfT14aHqVL3I8Ypk4b3dZb+wH/RCd2nJpEy22coFLvUnQgoLmfiDOtUASdSJAE5Wcpet4p"
+

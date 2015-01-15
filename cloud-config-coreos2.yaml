@@ -7,11 +7,9 @@ coreos:
     name: coreos2
     peer-addr: "172.16.1.18:7001"
   units: 
-    - 
-      command: start
+    - command: start
       name: etcd.service
-    - 
-      command: start
+    - command: start
       name: fleet.service
 hostname: coreos2
 ssh_authorized_keys: 

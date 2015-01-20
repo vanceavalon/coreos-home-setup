@@ -13,14 +13,14 @@ coreos:
       name: fleet.service
 hostname: coreos1
 ssh_authorized_keys:
-  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNQYI1x21AkfX4T9WynkXyP36Hf7NWjAPlgoQByWHA4O6XiXitHTeCgZsPPKqQaNdYU7Dq3mX3sg24IU8X5j2WY/vMDTOMiBaebSOulZDULfpHI+RS$
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNQYI1x21AkfX4T9WynkXyP36Hf7NWjAPlgoQByWHA4O6XiXitHTeCgZsPPKqQaNdYU7Dq3mX3sg24IU8X5j2WY/vMDTOMiBaebSOulZDULfpHI+RSb9iczWmzRngh4DbCwEZZU999HaQ2VcGqO4juul5hUW+fdQZvzqOL2J0Jj833AiYoQssOVIdPxGkEZejncCat/A6PpwLKh6p/Yq8fC/1YbJLAcTeWJmCDIU9oY6K1MEiNkcibwRTkr/khKI0fAPWuJBkW5D12JJWfT14aHqVL3I8Ypk4b3dZb+wH/RCd2nJpEy22coFLvUnQgoLmfiDOtUASdSJAE5Wcpet4p"
 
 # Add users to the system. Users are added after groups are added.
 users:
   - name: administrator
     gecos: local root user for
     lock-passwd: false
-    passwd: 4096$MxDohXMh$fUmSID8NvGFi8Pb1eH.5YEWlXGub4KVpXszu6GrYmNaQ246Y/y8HSvXJ46ktlQ.xkC2YrZJfmBJxtDCd7Cuds
+    passwd: $6$rounds=4096$MxDohXMh$fUmSID8NvGFi8Pb1eH.5YEWlXGub4KVpXszu6GrYmNaQ246Y/y8HSvXJ46ktlQ.xkC2YrZJfmBJxtDCd7Cuds.
     no-create-home:
     groups: root
     no-user-group:

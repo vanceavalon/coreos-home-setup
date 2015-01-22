@@ -4,22 +4,22 @@
 
 * Boot From a liveCD of Linux (CentOS maybe, I used Linux Mint)
 * Goto the [CoreOS bare-metal installation section](https://coreos.com/docs/running-coreos/bare-metal/installing-to-disk/) and choose the hyperlink "on Github here"
-* Copy the contents of this page and paste into a file on the desktop called coreos_install.sh:
+* Copy the contents of the "on Github here" page and paste into a file called coreos_install.sh:
 
-    `vim coreos_install.sh`
+    `vi coreos_install.sh`
 
 * chmod this .sh file so it can be executable by user:
 
     `chmod +x coreos_install.sh`
 
-* Use another Linux machine to generate rsa key for login on CoreOS, this will generate a public and private key that will need to be saved where the machine can get them later:
+* Use another Linux machine to generate rsa key for login on CoreOS, this will generate a public and private key that will need to be saved where they can be revrieved later:
 
     `ssh-keygen -t CoreOSBM_rsa -b 2048`
 
 * Generate a new discovery token for the cluster from [https://discovery.etcd.io/new](https://discovery.etcd.io/new). This token will be the same for every node on the cluster.
 * Create another file called *cloud-config.yaml*:
 
-    `vim cloud-config.yaml`
+    `vi cloud-config.yaml`
 
 * The "cloud-config.yaml" will contain such things as the hostname:
 

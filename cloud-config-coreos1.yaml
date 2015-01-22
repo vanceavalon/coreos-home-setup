@@ -23,7 +23,7 @@ users:
     passwd: $6$rounds=4096$MxDohXMh$fUmSID8NvGFi8Pb1eH.5YEWlXGub4KVpXszu6GrYmNaQ246Y/y8HSvXJ46ktlQ.xkC2YrZJfmBJxtDCd7Cuds.
     no-create-home:
     groups: root
-    no-user-group:
+    no-user-group: true
     system: true
 
 write_files:

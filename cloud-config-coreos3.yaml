@@ -85,6 +85,39 @@ coreos:
         --logtostderr=true
         Restart=always
         RestartSec=10
+    - name: kube-controller-manager.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes Controller Manager
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Requires=kube-apiserver.service
+        After=kube-apiserver.service
+
+        [Service]
+        ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v0.9.1/bin/linux/amd64/kube-controller-manager
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-controller-manager
+        ExecStart=/opt/bin/kube-controller-manager \
+        --machines=172.16.1.17 \
+        --master=172.16.1.17:8080 \
+        --logtostderr=true
+        Restart=always
+        RestartSec=10
+    - name: kube-scheduler.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes Scheduler
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Requires=kube-apiserver.service
+        After=kube-apiserver.service
+
+        [Service]
+        ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v0.9.1/bin/linux/amd64/kube-scheduler
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kube-scheduler
+        ExecStart=/opt/bin/kube-scheduler --master=172.16.1.17:8080
+        Restart=always
+        RestartSec=10
     - name: kube-proxy.service
       command: start
       content: |

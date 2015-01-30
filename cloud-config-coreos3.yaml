@@ -102,6 +102,26 @@ coreos:
         --logtostderr=true
         Restart=always
         RestartSec=10
+    - name: kube-kubelet.service
+      command: start
+      content: |
+        [Unit]
+        Description=Kubernetes Kubelet
+        Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+        Requires=etcd.service
+        After=etcd.service
+
+        [Service]
+        ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/kubernetes-release/release/v0.9.1/bin/linux/amd64/kubelet
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/kubelet
+        ExecStart=/opt/bin/kubelet \
+        --address=0.0.0.0 \
+        --port=10250 \
+        --hostname_override=172.16.1.17 \
+        --etcd_servers=http://127.0.0.1:4001 \
+        --logtostderr=true
+        Restart=always
+        RestartSec=10
 hostname: coreos3
 ssh_authorized_keys: 
   - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNQYI1x21AkfX4T9WynkXyP36Hf7NWjAPlgoQByWHA4O6XiXitHTeCgZsPPKqQaNdYU7Dq3mX3sg24IU8X5j2WY/vMDTOMiBaebSOulZDULfpHI+RSb9iczWmzRngh4DbCwEZZU999HaQ2VcGqO4juul5hUW+fdQZvzqOL2J0Jj833AiYoQssOVIdPxGkEZejncCat/A6PpwLKh6p/Yq8fC/1YbJLAcTeWJmCDIU9oY6K1MEiNkcibwRTkr/khKI0fAPWuJBkW5D12JJWfT14aHqVL3I8Ypk4b3dZb+wH/RCd2nJpEy22coFLvUnQgoLmfiDOtUASdSJAE5Wcpet4p"

@@ -45,4 +45,12 @@ write_files:
         alias cci='sudo coreos-cloudinit --from-file'
         alias j='journalctl'
         alias f='fleetctl'
+    - path: /opt/bin/waiter.sh
+      owner: root
+      content: |
+        #! /usr/bin/bash
+        until curl http://127.0.0.1:4001/v2/machines; do sleep 2; done
+
+
+
 

@@ -28,6 +28,41 @@ coreos:
         ExecStart=/usr/bin/bash /opt/bin/waiter.sh
         RemainAfterExit=true
         Type=oneshot
+    - name: flannel.service
+      command: start
+      content: |
+        [Unit]
+        Wants=etcd-waiter.service
+        After=etcd-waiter.service
+        Requires=etcd.service
+        After=etcd.service
+        After=network-online.target
+        Wants=network-online.target
+        Description=flannel is an etcd backed overlay network for containers
+
+        [Service]
+        Type=notify
+        ExecStartPre=-/usr/bin/mkdir -p /opt/bin
+        ExecStartPre=/usr/bin/wget -N -P /opt/bin https://storage.googleapis.com/k8s/flanneld
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/flanneld
+        ExecStartPre=-/usr/bin/etcdctl mk /coreos.com/network/config '{"Network":"10.244.0.0/16", "Backend": {"Type": "vxlan"}}'
+        ExecStart=/opt/bin/flanneld
+    - name: docker.service
+      command: start
+      content: |
+        [Unit]
+        After=flannel.service
+        Wants=flannel.service
+        Description=Docker Application Container Engine
+        Documentation=http://docs.docker.io
+
+        [Service]
+        EnvironmentFile=/run/flannel/subnet.env
+        ExecStartPre=/bin/mount --make-rprivate /
+        ExecStart=/usr/bin/docker -d --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU} -s=overlay -H fd://
+
+        [Install]
+        WantedBy=multi-user.target
 hostname: coreos3
 ssh_authorized_keys: 
   - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNQYI1x21AkfX4T9WynkXyP36Hf7NWjAPlgoQByWHA4O6XiXitHTeCgZsPPKqQaNdYU7Dq3mX3sg24IU8X5j2WY/vMDTOMiBaebSOulZDULfpHI+RSb9iczWmzRngh4DbCwEZZU999HaQ2VcGqO4juul5hUW+fdQZvzqOL2J0Jj833AiYoQssOVIdPxGkEZejncCat/A6PpwLKh6p/Yq8fC/1YbJLAcTeWJmCDIU9oY6K1MEiNkcibwRTkr/khKI0fAPWuJBkW5D12JJWfT14aHqVL3I8Ypk4b3dZb+wH/RCd2nJpEy22coFLvUnQgoLmfiDOtUASdSJAE5Wcpet4p"

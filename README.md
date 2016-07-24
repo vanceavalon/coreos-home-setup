@@ -2,7 +2,7 @@
 
 **Actual bare-metal CoreOS installation**
 
-* Boot From a liveCD of Linux (CentOS maybe, I used Linux Mint)
+* Boot From a Linux liveCD or FlashDrive
 * Goto the [CoreOS bare-metal installation section](https://coreos.com/docs/running-coreos/bare-metal/installing-to-disk/) and choose the hyperlink "on Github here"
 * Copy the contents of the "on Github here" page and paste into a file called coreos_install.sh:
 
